@@ -44,13 +44,10 @@ namespace ScaryKalista
             if (stacks > -1)
             {
                 var index = Spells.E.Level - 1;
-                return (RawRendDamage[index] + (0.6f * Player.Instance.TotalAttackDamage)) + 
-                    ((stacks) * (RawRendDamagePerSpear[index] + (RawRendDamagePerSpearMultiplier[index] * Player.Instance.TotalAttackDamage)));
+                return (RawRendDamage[index] + Player.Instance.TotalAttackDamage * (RawRendDamageMultiplier[index]) * (1+stacks * RawRendDamagePerSpearMultiplier[index]));
             }
-
             return 0;
         }
-
         public static float GetActualDamage(Obj_AI_Base target)
         {
             if (!Spells.E.IsReady() || !target.HasRendBuff()) return 0f;
